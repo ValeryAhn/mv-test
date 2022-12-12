@@ -1,0 +1,12 @@
+@import "variables";
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: calc(100vh - #{ $mv-100px}) ;
+    overflow: auto;
+    padding-bottom: $mv-100px;
+    position: relative;
+}

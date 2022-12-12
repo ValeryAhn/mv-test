@@ -1,0 +1,17 @@
+<ng-container *ngIf="news; else notFound">
+  <div class="content">
+    <a class="link" [routerLink]="'/news-list'" [state]="{ pageIndex }">
+        &lsaquo; Go back    
+    </a>
+    <h1 class="news-title">{{ news.title }}</h1>
+    <div class="news-meta flex-row">
+      <span class="news-author" *ngIf="news.author">{{ news.author }}</span>
+      <span class="news-date" *ngIf="news.published_at">{{ news.published_at | date }}</span>
+    </div>
+
+    <p class="news-desription">{{ news.description }}</p>
+  </div>
+</ng-container>
+<ng-template #notFound>
+  <h3>News is not found</h3>
+</ng-template>

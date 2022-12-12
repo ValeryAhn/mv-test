@@ -1,0 +1,54 @@
+@import "variables";
+:host {
+    display: flex;
+    flex-direction: column;
+
+    .news-container {
+        flex: none;
+        .news {
+            flex: none;
+            padding: $mv-24px 0;
+            border-bottom: $mv-3px solid $gray-6;
+            &:last-of-type {
+                border-bottom:  none;
+            }
+            
+            .news-link {
+                text-decoration: none;
+            }
+
+            .news-meta {
+                margin-bottom: $mv-4px;
+                font-size: $mv-12px;
+                color: $gray-2;
+            }
+
+            .news-title {
+                margin-bottom: 8px;
+            }
+
+            .news-author {
+                margin-right: 16px;
+            }
+        }
+    }
+    mat-paginator {
+        flex: none;
+        position: fixed;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+
+        
+    }
+
+    mat-progress-spinner {
+        margin: $mv-64px 0;
+        align-self: center;
+    }
+
+    .heading {
+        font-size: $mv-40px;
+        margin-top: $mv-40px;
+    }
+}

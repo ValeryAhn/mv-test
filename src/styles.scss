@@ -1,1 +1,86 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$mv-primary: mat.define-palette(mat.$indigo-palette);
+$mv-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$mv-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$mv-theme: mat.define-light-theme((
+  color: (
+    primary: $mv-primary,
+    accent: $mv-accent,
+    warn: $mv-warn,
+  )
+));
+
+@include mat.all-component-themes($mv-theme);
+
+@import 'variables';
+
 /* You can add global styles to this file, and also import other style files */
+
+$primary: mat.define-palette(mat.$indigo-palette, 500);
+$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+html, body { 
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+}
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: $gray-1;
+    margin: 0;
+}
+
+p {
+    line-height: 1.7;
+}
+
+.content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: $mv-100px * 8;
+    padding: 0 $mv-32px;
+    box-sizing: border-box;
+    > * {
+        flex: none;
+    }
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    color: $blue;
+    text-decoration: none;
+
+    &:hover {
+        color: $blue-hover;
+    }
+}
+
+.mat-mdc-paginator-container {
+    justify-content: center !important;
+}

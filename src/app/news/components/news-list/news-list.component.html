@@ -1,0 +1,56 @@
+
+<div class="content">
+  <h1 class="heading">News</h1>
+</div>
+<div
+  class="news-container flex-column"
+  *ngIf="newsList$ | async; let newsList; else: spinner"
+>
+<div class="content flex-column">
+  <div *ngFor="let news of newsList.data" class="news">
+    <a class="news-link link" [routerLink]="'/news'" [state]=" { news, pageIndex }">
+      <h2 class="news-title">{{ news.title }}</h2>
+    </a>
+    <div class="news-meta flex-row">
+      <span class="news-author">{{ news.author }}</span>
+      <span class="news-date">{{ news.published_at | date }}</span>
+    </div>
+    
+    <p class="news-description">{{ (news.description || '') | excerpt }}</p>
+  </div>
+</div>
+  <ng-container
+      [ngTemplateOutlet]="pagination"
+      [ngTemplateOutletContext]="{ total: newsList.pagination?.total }"
+    >
+    </ng-container>
+</div>
+<ng-template #spinner>
+  <div class="content flex-column">
+    <mat-progress-spinner
+      #spinner
+      class="example-margin"
+      [mode]="mode"
+      [diameter]="50"
+    >
+    </mat-progress-spinner>
+    <ng-container
+      [ngTemplateOutlet]="pagination"
+      [ngTemplateOutletContext]="{ total: length }"
+    >
+    </ng-container>
+  </div>
+</ng-template>
+<ng-template #pagination let-total="total">
+  <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="total"
+    [pageSize]="pageSize"
+    [disabled]="disabled"
+    [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+    [hidePageSize]="hidePageSize"
+    [pageIndex]="pageIndex"
+  >
+  </mat-paginator>
+</ng-template>

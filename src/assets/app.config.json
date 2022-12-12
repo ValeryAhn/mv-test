@@ -1,0 +1,7 @@
+{
+    "apiBaseUrl": "http://api.mediastack.com/v1",
+    "newsPath": "news",
+    "accessKey": "c5a85b39d998c242f21ee122e9c5d3cf",
+    "newsLanguages": "en",
+    "excerptLength": "250"
+}
