@@ -5,8 +5,9 @@
  * @interface NewsResponse
  */
 export interface NewsResponse {
-    data?: News[];
-    pagination?: NewsResponsePagination;
+    status?: string;
+    totalResults?: number;
+    results?: News[];
 }
 
 /**
@@ -16,10 +17,10 @@ export interface NewsResponse {
  * @interface News
  */
 export interface News {
-    author?: string;
+    creator?: string;
     country?: string;
     description?: string;
-    published_at?: string;
+    pubDate?: string;
     title?: string;
 }
 

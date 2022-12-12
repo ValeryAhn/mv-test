@@ -5,8 +5,8 @@
     </a>
     <h1 class="news-title">{{ news.title }}</h1>
     <div class="news-meta flex-row">
-      <span class="news-author" *ngIf="news.author">{{ news.author }}</span>
-      <span class="news-date" *ngIf="news.published_at">{{ news.published_at | date }}</span>
+      <span class="news-author" *ngIf="news.creator">{{ news.creator }}</span>
+      <span class="news-date" *ngIf="news.pubDate">{{ news.pubDate | date }}</span>
     </div>
 
     <p class="news-desription">{{ news.description }}</p>

@@ -19,7 +19,7 @@ export class NewsListComponent {
    *
    * @memberof NewsListComponent
    */
-  pageSize = 5;
+  pageSize = 10;
 
   /**
    * Номер текущей страницы
@@ -27,13 +27,6 @@ export class NewsListComponent {
    * @memberof NewsListComponent
    */
   pageIndex = 0;
-
-  /**
-   * Допустимые значения новостей на странице
-   *
-   * @memberof NewsListComponent
-   */
-  pageSizeOptions = [5, 10, 25];
 
   /**
    * Суммарное количество записей
@@ -51,7 +44,7 @@ export class NewsListComponent {
   newsList$: Observable<NewsResponse>;
 
   hidePageSize = false;
-  showPageSizeOptions = true;
+  showPageSizeOptions = false;
   showFirstLastButtons = true;
   disabled = false;
 
@@ -65,12 +58,8 @@ export class NewsListComponent {
    */
   handlePageEvent(e: PageEvent) {
     this.length = e.length;
-    this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.newsList$ = this.newsService.getNews(
-      this.pageSize,
-      this.pageIndex * this.pageSize
-    );
+    this.newsList$ = this.newsService.getNews(this.pageIndex);
   }
 
   /**
@@ -82,12 +71,8 @@ export class NewsListComponent {
   constructor(private newsService: NewsService, private router: Router) {
     // При возврате переходить на последнюю открытую страницу
     const state = this.router.getCurrentNavigation()?.extras.state as NewsData;
-    this.pageIndex =
-      Number(state?.pageIndex) || 0;
+    this.pageIndex = Number(state?.pageIndex) || 0;
 
-    this.newsList$ = this.newsService.getNews(
-      this.pageSize,
-      this.pageIndex * this.pageSize
-    );
+    this.newsList$ = this.newsService.getNews(this.pageIndex);
   }
 }

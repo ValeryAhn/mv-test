@@ -7,13 +7,13 @@
   *ngIf="newsList$ | async; let newsList; else: spinner"
 >
 <div class="content flex-column">
-  <div *ngFor="let news of newsList.data" class="news">
+  <div *ngFor="let news of newsList.results" class="news">
     <a class="news-link link" [routerLink]="'/news'" [state]=" { news, pageIndex }">
       <h2 class="news-title">{{ news.title }}</h2>
     </a>
     <div class="news-meta flex-row">
-      <span class="news-author">{{ news.author }}</span>
-      <span class="news-date">{{ news.published_at | date }}</span>
+      <span class="news-author" *ngIf="news.creator">{{ news.creator }}</span>
+      <span class="news-date">{{ news.pubDate | date }}</span>
     </div>
     
     <p class="news-description">{{ (news.description || '') | excerpt }}</p>
@@ -21,7 +21,7 @@
 </div>
   <ng-container
       [ngTemplateOutlet]="pagination"
-      [ngTemplateOutletContext]="{ total: newsList.pagination?.total }"
+      [ngTemplateOutletContext]="{ total: newsList.totalResults }"
     >
     </ng-container>
 </div>
@@ -48,8 +48,7 @@
     [pageSize]="pageSize"
     [disabled]="disabled"
     [showFirstLastButtons]="showFirstLastButtons"
-    [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-    [hidePageSize]="hidePageSize"
+    [hidePageSize]="true"
     [pageIndex]="pageIndex"
   >
   </mat-paginator>
